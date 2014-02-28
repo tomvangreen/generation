@@ -49,6 +49,10 @@ public class List2D<T> {
       return height;
    }
 
+   public int length() {
+      return length;
+   }
+
    public int getX(int position) {
       return position % width;
    }
@@ -59,6 +63,10 @@ public class List2D<T> {
 
    public int getPosition(int x, int y) {
       return x + y * width;
+   }
+
+   public boolean isPositionValid(int x, int y) {
+      return isPositionValid(getPosition(x, y));
    }
 
    public boolean isPositionValid(int position) {
@@ -74,10 +82,10 @@ public class List2D<T> {
    }
 
    public boolean set(int x, int y, T value) {
-      return set(getPosition(x, y), value);
+      return put(getPosition(x, y), value);
    }
 
-   public boolean set(int position, T value) {
+   public boolean put(int position, T value) {
       if (isPositionValid(position)) {
          list.set(position, value);
          return true;
@@ -85,7 +93,7 @@ public class List2D<T> {
       return false;
    }
 
-   public void uninit() {
+   public void deinit() {
       list.clear();
       width = 0;
       height = 0;
