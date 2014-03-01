@@ -2,18 +2,30 @@ package ch.digitalmeat.generation.level.data;
 
 import ch.digitalmeat.generation.data.List2D;
 
-public class Level {
+public class Grid {
    private boolean initialized;
    private CellFactory factory;
    private List2D<Cell> cells;
 
-   public Level() {
+   public List2D<Cell> cells() {
+      return cells;
+   }
+
+   public Grid() {
       this(new CellFactory.DefaultCellFactory());
    }
 
-   public Level(CellFactory factory) {
+   public Grid(CellFactory factory) {
       this.factory = factory;
       this.cells = new List2D<Cell>();
+   }
+
+   public int width() {
+      return cells.width();
+   }
+
+   public int height() {
+      return cells.height();
    }
 
    public void init(int width, int height) {
@@ -47,6 +59,10 @@ public class Level {
       }
       cells.deinit();
       initialized = false;
+   }
+
+   public Cell get(int x, int y) {
+      return cells.get(x, y);
    }
 
 }

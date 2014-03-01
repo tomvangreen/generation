@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import ch.digitalmeat.generation.level.data.Level;
+import ch.digitalmeat.generation.level.data.Grid;
 
 public abstract class Processor {
-   private Random r;
+   protected Random r;
    private List<Processor> children;
 
    public Processor() {
@@ -18,23 +18,29 @@ public abstract class Processor {
       this.r = random;
    }
 
-   public void process(Level level) {
+   public boolean process(Grid level) {
       if (r == null) {
          r = new Random();
       }
-      processImplementation(level);
-      for (Processor processor : children) {
-         processor.process(level);
+      boolean result = processImplementation(level);
+      if (result) {
+         for (Processor processor : children) {
+            result = processor.process(level);
+            if (!result) {
+               return false;
+            }
+         }
       }
+      return result;
    }
 
-   public abstract void processImplementation(Level level);
+   protected abstract boolean processImplementation(Grid level);
 
    public class Container extends Processor {
 
       @Override
-      public void processImplementation(Level level) {
-
+      protected boolean processImplementation(Grid level) {
+         return true;
       }
 
    }

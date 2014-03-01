@@ -62,6 +62,9 @@ public class List2D<T> {
    }
 
    public int getPosition(int x, int y) {
+      if (x < 0 || x >= width || y < 0 || y >= height) {
+         return -1;
+      }
       return x + y * width;
    }
 

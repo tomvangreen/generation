@@ -1,16 +1,29 @@
 package ch.digitalmeat.generation.level.data;
 
 public enum Direction8 {
-   North(0, 0, 1), NorthEast(1, 1, 1), East(2, 1, 0), SouthEast(3, 1, -1), South(4, 0, -1), SouthWest(5, -1, -1), West(6, -1, 0), NorthWest(7, -1, 1);
+// @formatter:off
+   North("N", "North", 0, 0, 1)
+   , NorthEast("NE", "Northeast", 1, 1, 1)
+   , East("E", "East", 2, 1, 0)
+   , SouthEast("SE", "Southeast", 3, 1, -1)
+   , South("S", "South", 4, 0, -1)
+   , SouthWest("SW", "Southwest", 5, -1, -1)
+   , West("W", "West", 6, -1, 0)
+   , NorthWest("NW", "Northwest", 7, -1, 1);
+// @formatter:on  
 
    public final int value;
    public final int xOffset;
    public final int yOffset;
+   public final String name;
+   public final String shortName;
 
-   Direction8(int value, int xOffset, int yOffset) {
+   Direction8(String shortName, String name, int value, int xOffset, int yOffset) {
       this.value = value;
       this.xOffset = xOffset;
       this.yOffset = yOffset;
+      this.shortName = shortName;
+      this.name = name;
    }
 
    public Direction8 getOpposite() {
