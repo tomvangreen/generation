@@ -1,5 +1,7 @@
 package ch.digitalmeat.generation.level.data;
 
+import java.util.EnumSet;
+
 public enum Direction8 {
 // @formatter:off
    North("N", "North", 0, 0, 1)
@@ -48,5 +50,9 @@ public enum Direction8 {
          value -= length;
       }
       return value;
+   }
+
+   public static EnumSet<Direction8> getCardinalDirecations() {
+      return EnumSet.of(Direction8.North, Direction8.East, Direction8.South, Direction8.West);
    }
 }

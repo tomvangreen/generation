@@ -18,6 +18,7 @@ public class TemplateFiller extends Processor {
    private List<IntVector2> candidatesTemp = new ArrayList<IntVector2>();
    private List<IntVector2> coordinates = new ArrayList<IntVector2>();
    private int placedRooms = 0;
+   private RoomUtil util = new RoomUtil();
 
    public TemplateFiller addTemplate(RoomConfig room) {
       templates.add(room);
@@ -41,6 +42,23 @@ public class TemplateFiller extends Processor {
       }
       while (placementIteration(cells)) {
       }
+      int length = cells.length();
+      Cell cell = cells.get(r.nextInt(length));
+      List<Cell> reachableCells = util.getReachableCells(cell);
+
+      for (Cell coords : reachableCells) {
+         coords.put(RoomCellFactory.CONNECTED, true);
+      }
+
+      List<Cell> walls = util.findNeighbouringTiles(reachableCells);
+      if (walls.size() > 0) {
+         // TODO: What a wast ;)
+         Collections.shuffle(walls, r);
+         util.randomBreakThrough(r, walls.get(0), true);
+         ;
+
+      }
+
       return true;
    }
 
