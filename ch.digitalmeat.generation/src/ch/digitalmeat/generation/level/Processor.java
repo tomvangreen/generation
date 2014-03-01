@@ -25,6 +25,7 @@ public abstract class Processor {
       boolean result = processImplementation(level);
       if (result) {
          for (Processor processor : children) {
+            processor.setRandom(r);
             result = processor.process(level);
             if (!result) {
                return false;

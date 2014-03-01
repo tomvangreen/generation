@@ -28,6 +28,7 @@ public class TemplateFiller extends Processor {
    @Override
    protected boolean processImplementation(Grid level) {
       candidates.clear();
+      System.out.println("Generating level");
       List2D<Cell> cells = level.cells();
       int width = cells.width();
       int height = cells.height();
@@ -44,22 +45,29 @@ public class TemplateFiller extends Processor {
       }
       int length = cells.length();
       Cell cell = cells.get(r.nextInt(length));
-      List<Cell> reachableCells = util.getReachableCells(cell);
+      int run = 0;
+      List<Cell> reachableCells = new ArrayList<Cell>();
+      while (true) {
+         run++;
+         System.out.println("Connection Iteration " + run);
+         reachableCells = util.getReachableCells(cell, reachableCells);
+         System.out.println("Reachable Cells: " + reachableCells.size());
+         for (Cell coords : reachableCells) {
+            coords.put(RoomCellFactory.CONNECTED, true);
+         }
 
-      for (Cell coords : reachableCells) {
-         coords.put(RoomCellFactory.CONNECTED, true);
+         List<Cell> walls = util.findNeighbouringTiles(reachableCells, true);
+
+         if (walls.size() > 0) {
+            // TODO: What a waste ;)
+            Collections.shuffle(walls, r);
+            cell = walls.get(0);
+            util.randomBreakThrough(r, cell, true);
+         } else {
+            return true;
+         }
+         reachableCells.remove(cell);
       }
-
-      List<Cell> walls = util.findNeighbouringTiles(reachableCells);
-      if (walls.size() > 0) {
-         // TODO: What a wast ;)
-         Collections.shuffle(walls, r);
-         util.randomBreakThrough(r, walls.get(0), true);
-         ;
-
-      }
-
-      return true;
    }
 
    protected boolean placementIteration(List2D<Cell> cells) {

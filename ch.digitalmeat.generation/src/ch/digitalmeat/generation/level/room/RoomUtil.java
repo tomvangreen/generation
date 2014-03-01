@@ -25,13 +25,15 @@ public class RoomUtil {
       openCells.clear();
       closedCells.clear();
 
-      openCells.addAll(list);
+      closedCells.addAll(list);
 
       EnumSet<Direction8> directions = Direction8.getCardinalDirecations();
       openCells.add(cell);
       while (openCells.size() > 0) {
          Cell open = openCells.remove(0);
-         closedCells.add(open);
+         if (!closedCells.contains(open)) {
+            closedCells.add(open);
+         }
          for (Direction8 direction : directions) {
             if (canPass(open, direction)) {
                Cell neighbour = open.neighbours[direction.value];
@@ -53,13 +55,13 @@ public class RoomUtil {
       return open.get(direction.name, RoomCellFactory.EMPTY) != RoomCellFactory.WALL;
    }
 
-   public List<Cell> findNeighbouringTiles(List<Cell> input) {
+   public List<Cell> findNeighbouringTiles(List<Cell> input, boolean requireUnconnected) {
       List<Cell> output = new ArrayList<Cell>();
       EnumSet<Direction8> directions = Direction8.getCardinalDirecations();
       for (Cell cell : input) {
          boolean candidate = false;
          for (Direction8 direction : directions) {
-            if (hasPossibleBreakthrough(cell, direction, true)) {
+            if (hasPossibleBreakthrough(cell, direction, requireUnconnected)) {
                candidate = true;
             }
          }
