@@ -71,7 +71,7 @@ public class RoomUtil {
 
    public boolean hasPossibleBreakthrough(Cell cell, Direction8 direction, boolean requireUnconnected) {
       Cell neighbour = cell.neighbours[direction.value];
-      if (neighbour == null) {
+      if (neighbour == null || !neighbour.get(RoomCellFactory.USED, false)) {
          return false;
       }
       if (requireUnconnected && neighbour.get(RoomCellFactory.CONNECTED, false)) {

@@ -43,19 +43,51 @@ public class RoomTest {
    }
 
    @Test
-   public void templateRooms() {
+   public void templateRooms4x4() {
+
       TemplateFiller filler = new TemplateFiller();
       filler.addTemplate((new RoomConfig()).size(1, 1));
+      filler.addTemplate((new RoomConfig()).size(1, 2));
+      filler.addTemplate((new RoomConfig()).size(2, 2));
       filler.addTemplate((new RoomConfig()).size(2, 1));
       filler.addTemplate((new RoomConfig()).size(4, 1));
-      filler.addTemplate((new RoomConfig()).size(4, 2));
-      filler.addTemplate((new RoomConfig()).size(2, 2));
-      filler.addTemplate((new RoomConfig()).size(2, 4));
-      filler.addTemplate((new RoomConfig()).size(3, 2));
-      filler.addTemplate((new RoomConfig()).size(5, 5));
       filler.addTemplate((new RoomConfig()).size(1, 4));
 
       Generator generator = new Generator(new RoomCellFactory(), filler);
-      exportGrid(generator.generate(16, 16), "template-rooms.png");
+      exportGrid(generator.generate(4, 4), "template-rooms-4x4.png");
+   }
+
+   @Test
+   public void templateRooms16x16() {
+
+      TemplateFiller filler = new TemplateFiller();
+      filler.addTemplate((new RoomConfig()).size(1, 2));
+      filler.addTemplate((new RoomConfig()).size(2, 2));
+      filler.addTemplate((new RoomConfig()).size(2, 1));
+      filler.addTemplate((new RoomConfig()).size(4, 2));
+      filler.addTemplate((new RoomConfig()).size(2, 4));
+      filler.addTemplate((new RoomConfig()).size(4, 4));
+      filler.addTemplate((new RoomConfig()).size(4, 6));
+      filler.addTemplate((new RoomConfig()).size(4, 8));
+      filler.addTemplate((new RoomConfig()).size(8, 4));
+
+      Generator generator = new Generator(new RoomCellFactory(), filler);
+      exportGrid(generator.generate(16, 16), "template-rooms-16x16.png");
+   }
+
+   @Test
+   public void templateRooms64x48() {
+
+      TemplateFiller filler = new TemplateFiller();
+
+      filler.addTemplate((new RoomConfig()).size(4, 2));
+      filler.addTemplate((new RoomConfig()).size(2, 4));
+      filler.addTemplate((new RoomConfig()).size(4, 4));
+      filler.addTemplate((new RoomConfig()).size(4, 6));
+      filler.addTemplate((new RoomConfig()).size(4, 8));
+      filler.addTemplate((new RoomConfig()).size(8, 4));
+
+      Generator generator = new Generator(new RoomCellFactory(), filler);
+      exportGrid(generator.generate(64, 48), "template-rooms-64x48.png");
    }
 }
