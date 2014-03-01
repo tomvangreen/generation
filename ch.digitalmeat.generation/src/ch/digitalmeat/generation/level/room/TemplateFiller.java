@@ -17,6 +17,7 @@ public class TemplateFiller extends Processor {
    private List<IntVector2> candidates = new ArrayList<IntVector2>();
    private List<IntVector2> candidatesTemp = new ArrayList<IntVector2>();
    private List<IntVector2> coordinates = new ArrayList<IntVector2>();
+   private List<List<Cell>> rooms = new ArrayList<List<Cell>>();
    private int placedRooms = 0;
    private RoomUtil util = new RoomUtil();
 
@@ -112,6 +113,7 @@ public class TemplateFiller extends Processor {
    protected void place(List2D<Cell> cells, RoomConfig cfg, IntVector2 pos) {
       int w = cfg.width;
       int h = cfg.height;
+      List<Cell> room = new ArrayList<Cell>();
       for (int y = 0; y < h; y++) {
          for (int x = 0; x < w; x++) {
             Cell cell = cells.get(pos.x + x, pos.y + y);
@@ -128,8 +130,10 @@ public class TemplateFiller extends Processor {
             if (y == h - 1) {
                cell.put(Direction8.North.name, RoomCellFactory.WALL);
             }
+            room.add(cell);
          }
       }
+      rooms.add(room);
    }
 
    /**
