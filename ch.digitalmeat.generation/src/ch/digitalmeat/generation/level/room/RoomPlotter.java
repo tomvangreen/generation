@@ -41,12 +41,19 @@ public class RoomPlotter extends AwtPlotter {
       plotGrid(x, y, g2);
    }
 
-   private void plotUsed(Cell cell, int x, int y, Graphics2D g2) {
-      if (cell.get(RoomCellFactory.CONNECTED, false)) {
-         g2.setColor(Color.white);
-      } else {
-         g2.setColor(Color.gray);
+   private Color getRoomColor(Cell cell) {
+      String roomType = cell.get(RoomCellFactory.ROOM, "");
+      if (!cell.get(RoomCellFactory.CONNECTED, false)) {
+         return Color.gray;
       }
+      if (RoomCellFactory.ROOM_START.equals(roomType)) {
+         return Color.green;
+      }
+      return Color.white;
+   }
+
+   private void plotUsed(Cell cell, int x, int y, Graphics2D g2) {
+      g2.setColor(getRoomColor(cell));
       g2.fillRect(x, y, tileWidth, tileHeight);
       g2.setColor(Color.black);
       handleDirection(cell, x, y, g2, Direction8.North);

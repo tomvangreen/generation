@@ -14,6 +14,8 @@ public class RoomCellFactory implements CellFactory {
    public final static int EMPTY = 0;
    public final static int WALL = 1;
    public final static int DOOR = 2;
+   public static final String ROOM = "ROOM";
+   public static final String ROOM_START = "ROOM_START";
 
    @Override
    public Cell spawn() {

@@ -45,6 +45,7 @@ public class TemplateFiller extends Processor {
       }
       int length = cells.length();
       Cell cell = cells.get(r.nextInt(length));
+      Cell firstCell = cell;
       int run = 0;
       List<Cell> reachableCells = new ArrayList<Cell>();
       while (true) {
@@ -76,7 +77,10 @@ public class TemplateFiller extends Processor {
             dropped++;
          }
       }
-
+      List<Cell> startingRoom = util.getRoom(cell);
+      for (Cell roomCell : startingRoom) {
+         roomCell.put(RoomCellFactory.ROOM, RoomCellFactory.ROOM_START);
+      }
       return true;
    }
 
