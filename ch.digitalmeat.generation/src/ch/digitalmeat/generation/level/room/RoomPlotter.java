@@ -42,7 +42,11 @@ public class RoomPlotter extends AwtPlotter {
    }
 
    private void plotUsed(Cell cell, int x, int y, Graphics2D g2) {
-      g2.setColor(Color.white);
+      if (cell.get(RoomCellFactory.CONNECTED, false)) {
+         g2.setColor(Color.white);
+      } else {
+         g2.setColor(Color.gray);
+      }
       g2.fillRect(x, y, tileWidth, tileHeight);
       g2.setColor(Color.black);
       handleDirection(cell, x, y, g2, Direction8.North);

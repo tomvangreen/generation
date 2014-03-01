@@ -10,6 +10,7 @@ import ch.digitalmeat.generation.level.data.CellFactory;
 public class RoomCellFactory implements CellFactory {
 
    public static final String USED = "used";
+   public static final String CONNECTED = "connected";
    public final static int EMPTY = 0;
    public final static int WALL = 1;
    public final static int DOOR = 2;
@@ -19,6 +20,7 @@ public class RoomCellFactory implements CellFactory {
       Cell cell = new Cell();
 
       cell.put(USED, false);
+      cell.put(CONNECTED, false);
 
       cell.put(North.name, EMPTY);
       cell.put(East.name, EMPTY);

@@ -30,6 +30,7 @@ public class Randomizer extends Processor {
          cell.put(RoomCellFactory.USED, false);
       } else {
          cell.put(RoomCellFactory.USED, true);
+         cell.put(RoomCellFactory.CONNECTED, r.nextBoolean());
 
          cell.put(North.name, randomWall());
          cell.put(East.name, randomWall());
