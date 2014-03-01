@@ -17,8 +17,15 @@ public class RoomCellFactory implements CellFactory {
 
    @Override
    public Cell spawn() {
-      Cell cell = new Cell();
+      Cell cell = new Cell(this);
 
+      init(cell);
+
+      return cell;
+   }
+
+   @Override
+   public void init(Cell cell) {
       cell.put(USED, false);
       cell.put(CONNECTED, false);
 
@@ -26,7 +33,5 @@ public class RoomCellFactory implements CellFactory {
       cell.put(East.name, EMPTY);
       cell.put(South.name, EMPTY);
       cell.put(West.name, EMPTY);
-
-      return cell;
    }
 }

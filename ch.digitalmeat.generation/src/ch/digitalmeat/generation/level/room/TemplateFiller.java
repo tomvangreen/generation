@@ -64,10 +64,20 @@ public class TemplateFiller extends Processor {
             cell = walls.get(0);
             util.randomBreakThrough(r, cell, true);
          } else {
-            return true;
+            break;
          }
          reachableCells.remove(cell);
       }
+      int dropped = 0;
+      for (int index = 0; index < length; index++) {
+         Cell c = cells.get(index);
+         if (!c.get(RoomCellFactory.CONNECTED, false)) {
+            c.init();
+            dropped++;
+         }
+      }
+
+      return true;
    }
 
    protected boolean placementIteration(List2D<Cell> cells) {
