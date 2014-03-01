@@ -15,10 +15,7 @@ public class RoomUtil {
    private List<Cell> closedCells = new ArrayList<Cell>();
 
    public List<Cell> getReachableCells(Cell cell) {
-      return getReachableCells(cell, new ArrayList<Cell>());
-   }
-
-   public List<Cell> getReachableCells(Cell cell, List<Cell> list) {
+      List<Cell> list = new ArrayList<Cell>();
       if (cell == null) {
          return null;
       }
@@ -26,7 +23,7 @@ public class RoomUtil {
       closedCells.clear();
 
       closedCells.addAll(list);
-
+      closedCells.remove(cell);
       EnumSet<Direction8> directions = Direction8.getCardinalDirecations();
       openCells.add(cell);
       while (openCells.size() > 0) {

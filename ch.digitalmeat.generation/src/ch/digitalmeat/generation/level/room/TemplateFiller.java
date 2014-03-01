@@ -50,7 +50,7 @@ public class TemplateFiller extends Processor {
       while (true) {
          run++;
          System.out.println("Connection Iteration " + run);
-         reachableCells = util.getReachableCells(cell, reachableCells);
+         reachableCells = util.getReachableCells(cell);
          System.out.println("Reachable Cells: " + reachableCells.size());
          for (Cell coords : reachableCells) {
             coords.put(RoomCellFactory.CONNECTED, true);

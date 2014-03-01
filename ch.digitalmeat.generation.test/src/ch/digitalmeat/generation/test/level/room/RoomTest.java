@@ -56,6 +56,6 @@ public class RoomTest {
       filler.addTemplate((new RoomConfig()).size(1, 4));
 
       Generator generator = new Generator(new RoomCellFactory(), filler);
-      exportGrid(generator.generate(2, 2), "template-rooms.png");
+      exportGrid(generator.generate(16, 16), "template-rooms.png");
    }
 }
