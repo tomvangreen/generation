@@ -89,7 +89,8 @@ public class TemplateFiller extends Processor {
       temp.clear();
       temp.addAll(templates);
       Collections.shuffle(temp, r);
-
+      // TODO: Keep track of when a room cannot be placed anymore. Like this the
+      // algo doesn't stop, when the first unplaceable room comes up.
       while (temp.size() > 0) {
          RoomConfig config = temp.remove(0);
          candidatesTemp.clear();
